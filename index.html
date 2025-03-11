@@ -11,33 +11,38 @@
 <body>
     <div id="counter">Dots: 0</div>
     <script>
+// Calculate the total number of pixels on the screen
+const totalPixels = window.screen.width * window.screen.height;
+
         let dotCount = 0;
-        const maxDots = 8000000000;
+        const maxDots = totalPixels;
         const counter = document.getElementById('counter');
 
         function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-                       for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
-        function createDot() {
-            if (dotCount >= maxDots) {
-                document.body.innerHTML = '<div id="counter">Dots: 0</div>';
-                dotCount = 0;
-            }
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            dot.style.left = `${Math.random() * window.innerWidth}px`;
-            dot.style.top = `${Math.random() * window.innerHeight}px`;
-            document.body.appendChild(dot);
-            dotCount++;
-            counter.textContent = `Dots: ${dotCount}`;
-        }
+function createDot() {
+    if (dotCount >= maxDots) {
+        document.body.innerHTML = '<div id="counter">Dots: 0</div>';
+        dotCount = 0;
+    }
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.style.left = `${Math.random() * window.innerWidth}px`;
+    dot.style.top = `${Math.random() * window.innerHeight}px`;
+    dot.style.backgroundColor = getRandomColor(); // Correctly apply the random color
+    document.body.appendChild(dot);
+    dotCount++;
+    counter.textContent = `Dots: ${dotCount}`;
+}
 
-        setInterval(createDot, 100);
+        setInterval(createDot, 0);
     </script>
-    <p>art project | counting 8 billion dots</p>
+    <p>art project | counting dots</p>
 </body>
